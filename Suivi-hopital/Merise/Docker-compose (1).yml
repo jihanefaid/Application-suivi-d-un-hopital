@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  db:
+    container_name: postgres_container
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: jihane
+      POSTGRES_USER: dbuser
+      POSTGRES_DB: Suivi_patient 
+    ports:
+      - "5433:5432"
+    volumes:
+      - pg_data:/var/lib/postgres/data
+
+  pg-admin:
+    image: dpage/pgadmin4:6
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@email.com
+      PGADMIN_DEFAULT_PASSWORD: root
+      PGADMIN_LISTEN_PORT: 5050
+    ports:
+      - "5050:5050"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+
+volumes:
+  pg_data:
+  pgadmin_data:
